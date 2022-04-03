@@ -9,6 +9,6 @@ public class PostDto {
     private long postID;
     private String title;
     private String content;
-    
+
 
 }
