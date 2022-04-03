@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="spec.spring.bean.SonyRAM" id="sonyRam" scope="prototype"/>
+    <bean class="spec.spring.bean.KingstonRAM" id="kingstonRam" scope="prototype"/>
+
+    <bean class="spec.spring.bean.AmdCPU" id="amdCpu"/>
+    <bean class="spec.spring.bean.IntelCPU" id="intelCpu"/>
+
+    <bean class="spec.spring.bean.AsusSCREEN" id="asusScreen"/>
+    <bean class="spec.spring.bean.DellSCREEN" id="dellScreen"/>
+
+    <bean class="spec.spring.bean.DexpSTORAGE" id="dexpStorage" scope="prototype"/>
+    <bean class="spec.spring.bean.HpSTORAGE" id="hpStorage"/>
+
+    <bean class="spec.spring.bean.Computer" id="myComputer">
+        <!-- Property injection-->
+  <!--      <property name="cpu" ref="intelCpu"/>
+
+        <property name="ramList">
+            <list>
+                <ref bean = "KingstonRAM"/>
+                <ref bean = "SonyRAM"/>
+            </list>
+        </property>-->
+
+        <!-- Constructor injection-->
+        <constructor-arg name="cpu" ref="amdCpu"/>
+        <constructor-arg name="ramList">
+            <list>
+                <ref bean="kingstonRam" />
+                <ref bean="sonyRam" />
+                <ref bean="kingstonRam" />
+            </list>
+        </constructor-arg>
+
+        <constructor-arg name="screen" ref="dellScreen"/>
+        <constructor-arg>
+            <list>
+                <ref bean="dexpStorage"/>
+                <ref bean="hpStorage"/>
+            </list>
+        </constructor-arg>
+
+    </bean>
+
+</beans>
