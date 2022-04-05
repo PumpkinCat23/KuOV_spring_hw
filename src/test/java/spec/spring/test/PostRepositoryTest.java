@@ -15,6 +15,7 @@ import spec.spring.entity.Post;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -49,17 +50,17 @@ public class PostRepositoryTest {
 
         postRepository.save(post);
         assertEquals(4, postRepository.count());
-        assertEquals("Day 4", postRepository.findById(4L).orElseThrow(RuntimeException::new).getTitle());
+        assertEquals("Day 4", postRepository.findById(4L).orElseThrow(NoSuchElementException::new).getTitle());
     }
 
     @Test
     public void update(){
-        Post post = postRepository.findById(1L).orElseThrow(RuntimeException::new);
+        Post post = postRepository.findById(1L).orElseThrow(NoSuchElementException::new);
         post.setTitle("Day 4");
 
         postRepository.save(post);
         assertEquals(3, postRepository.count());
-        assertEquals("Day 4", postRepository.findById(1L).orElseThrow(RuntimeException::new).getTitle());
+        assertEquals("Day 4", postRepository.findById(1L).orElseThrow(NoSuchElementException::new).getTitle());
 //        assertNotNull(postRepository.findById(1L).orElseThrow().getDtUpdated());
     }
 
@@ -71,7 +72,7 @@ public class PostRepositoryTest {
 
     @Test
     void postTagComment(){
-        Post post = postRepository.findById(1L).orElseThrow(RuntimeException::new);
+        Post post = postRepository.findById(1L).orElseThrow(NoSuchElementException::new);
         assertEquals(2, post.getTags().size());
         assertEquals(3, post.getComments().size());
     }
