@@ -49,17 +49,17 @@ public class PostRepositoryTest {
 
         postRepository.save(post);
         assertEquals(4, postRepository.count());
-        assertEquals("Day 4", postRepository.findById(4L).orElseThrow().getTitle());
+        assertEquals("Day 4", postRepository.findById(4L).orElseThrow(RuntimeException::new).getTitle());
     }
 
     @Test
     public void update(){
-        Post post = postRepository.findById(1L).orElseThrow();
+        Post post = postRepository.findById(1L).orElseThrow(RuntimeException::new);
         post.setTitle("Day 4");
 
         postRepository.save(post);
         assertEquals(3, postRepository.count());
-        assertEquals("Day 4", postRepository.findById(1L).orElseThrow().getTitle());
+        assertEquals("Day 4", postRepository.findById(1L).orElseThrow(RuntimeException::new).getTitle());
 //        assertNotNull(postRepository.findById(1L).orElseThrow().getDtUpdated());
     }
 
@@ -71,7 +71,7 @@ public class PostRepositoryTest {
 
     @Test
     void postTagComment(){
-        Post post = postRepository.findById(1L).orElseThrow();
+        Post post = postRepository.findById(1L).orElseThrow(RuntimeException::new);
         assertEquals(2, post.getTags().size());
         assertEquals(3, post.getComments().size());
     }
