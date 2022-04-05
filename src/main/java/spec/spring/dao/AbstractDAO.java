@@ -1,5 +1,7 @@
 package spec.spring.dao;
 
+import spec.spring.entity.Post;
+
 import java.util.List;
 
 public interface AbstractDAO <T>{
