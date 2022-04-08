@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS "user";
 
 CREATE TABLE post (
     post_id bigserial PRIMARY KEY,
-    user_id biginteger
+    user_id biginteger REFERENCES "user"(user_id) ON DELETE CASCADE,
     title varchar(100) NOT NULL,
     content text NOT NULL,
     dt_created timestamp NOT NULL,
