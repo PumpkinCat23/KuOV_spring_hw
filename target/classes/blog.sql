@@ -3,15 +3,15 @@ DROP TABLE IF EXISTS post_tag;
 DROP TABLE IF EXISTS tag;
 DROP TABLE IF EXISTS post;
 
---TODO
---DROP TABLE IF EXISTS user_role;
---DROP TABLE IF EXISTS role;
---DROP TABLE IF EXISTS "user";
+TODO
+DROP TABLE IF EXISTS user_role;
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS "user";
 
 
 CREATE TABLE post (
     post_id bigserial PRIMARY KEY,
---    user_id biginteger
+    user_id biginteger
     title varchar(100) NOT NULL,
     content text NOT NULL,
     dt_created timestamp NOT NULL,
@@ -30,9 +30,31 @@ CREATE TABLE post_tag (
     PRIMARY KEY (post_id, tag_id)
 );
 
+CREATE TABLE "user" (
+    user_id bigserial PRIMARY KEY,
+    username varchar(50) NOT NULL,
+    password varchar(50) NOT NULL,
+    first_name varchar(50) NOT NULL,
+    last_name varchar(50) NOT NULL,
+    created_at timestamp NOT NULL,
+    is_active boolean NOT NULL      --?????
+)
+
+CREATE TABLE role (
+    role_id bigserial PRIMARY KEY,
+    name varchar(50) NOT NULL
+)
+
+CREATE TABLE user_role (
+    user_id bigint REFERENCES role(role_id) ON DELETE CASCADE,
+    role_id bigint REFERENCES "user"(user_id) ON DELETE CASCADE,
+    PRIMARY KEY (role_id, user_id)
+)
+
+
 CREATE TABLE comment (
     comment_id bigserial PRIMARY KEY,
---    user_id biginteger
+    user_id biginteger
     post_id bigint REFERENCES post(post_id) ON DELETE CASCADE,
     content text,
     dt_created timestamp NOT NULL,
